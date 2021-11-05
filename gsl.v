@@ -257,4 +257,5 @@ module gsl
 #include <gsl/gsl_wavelet.h>
 
 pub type double = C.double
-pub type size   = C.size_t
+pub type size_t = C.size_t
+pub type float  = C.float
