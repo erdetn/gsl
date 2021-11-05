@@ -20,23 +20,23 @@ pub struct VectorFloatConstView {
 
 /* Allocation */
 
-fn C.gsl_vector_float_alloc (n size) &C.gsl_vector_float
-pub fn new_vector_float(n size) VectorFloat {
+fn C.gsl_vector_float_alloc (n size_t) &C.gsl_vector_float
+pub fn new_vector_float(n size_t) VectorFloat {
 	return VectorFloat{
 		ptr: C.gsl_vector_float_alloc(n)
 	}
 }
 
-fn C.gsl_vector_float_calloc (n size) &C.gsl_vector_float
-pub fn calloc_vector_float(n size) VectorFloat {
+fn C.gsl_vector_float_calloc (n size_t) &C.gsl_vector_float
+pub fn calloc_vector_float(n size_t) VectorFloat {
 	return VectorFloat {
 		ptr: C.gsl_vector_float_calloc(n)
 	}
 }
 
-fn C.gsl_vector_float_alloc_from_block (&C.gsl_block_float, size, size, size)  &C.gsl_vector_float
+fn C.gsl_vector_float_alloc_from_block (&C.gsl_block_float, size_t, size_t, size_t)  &C.gsl_vector_float
 
-fn C.gsl_vector_float_alloc_from_vector (&C.gsl_vector_float, size, size, size) &C.gsl_vector_float
+fn C.gsl_vector_float_alloc_from_vector (&C.gsl_vector_float, size_t, size_t, size_t) &C.gsl_vector_float
 
 fn C.gsl_vector_float_free (&C.gsl_vector_float)
 pub fn (this VectorFloat)free() {
@@ -47,19 +47,19 @@ pub fn (this VectorFloat)free() {
 // TODO //
 fn C.gsl_vector_float_view_array(v &C.float, n C.size_t) C._gsl_vector_float_view 
 
-fn C.gsl_vector_float_view_array_with_stride (&C.float, size, size) C._gsl_vector_float_view
+fn C.gsl_vector_float_view_array_with_stride (&C.float, size_t, size_t) C._gsl_vector_float_view
  
 fn C.gsl_vector_float_const_view_array (const float *v, size_t n) C._gsl_vector_float_const_view
 
-fn C.gsl_vector_float_const_view_array_with_stride (&C.float, size, size) C._gsl_vector_float_const_view
+fn C.gsl_vector_float_const_view_array_with_stride (&C.float, size_t, size_t) C._gsl_vector_float_const_view
  
-fn C.gsl_vector_float_subvector (&C.gsl_vector_float, size, size) C._gsl_vector_float_view
+fn C.gsl_vector_float_subvector (&C.gsl_vector_float, size_t, size_t) C._gsl_vector_float_view
 
-fn C.gsl_vector_float_subvector_with_stride (&C.gsl_vector_float, size, size, size)C._gsl_vector_float_view
+fn C.gsl_vector_float_subvector_with_stride (&C.gsl_vector_float, size_t, size_t, size_t)C._gsl_vector_float_view
  
-fn C.gsl_vector_float_const_subvector (&C.gsl_vector_float, size, size) C._gsl_vector_float_const_view
+fn C.gsl_vector_float_const_subvector (&C.gsl_vector_float, size_t, size_t) C._gsl_vector_float_const_view
 
-fn C.gsl_vector_float_const_subvector_with_stride (&C.gsl_vector_float, size, size, size) C._gsl_vector_float_const_view
+fn C.gsl_vector_float_const_subvector_with_stride (&C.gsl_vector_float, size_t, size_t, size_t) C._gsl_vector_float_const_view
 // ---- //
 
 // Operations
@@ -74,8 +74,8 @@ pub fn (this VectorFloat)set_all(value f32) {
 	C.gsl_vector_float_set_all(this.ptr, C.float(value))
 }
 
-fn C.gsl_vector_float_set_basis(&C.gsl_vector_float, size) int
-pub fn (this VectorFloat)set_basis(i size) int {
+fn C.gsl_vector_float_set_basis(&C.gsl_vector_float, size_t) int
+pub fn (this VectorFloat)set_basis(i size_t) int {
 	return C.gsl_vector_float_set_basis(this.ptr, i)
 }
 
@@ -102,7 +102,7 @@ pub fn (this VectorFloat)swap(mut vec VectorFloat) int {
 }
 
 fn C.gsl_vector_float_swap_elements (&C.gsl_vector_float, i C.size_t, j C.size_t) int
-pub fn (this VectorFloat)swap_elements(i size, j size) int {
+pub fn (this VectorFloat)swap_elements(i size_t, j size_t) int {
 	return C.gsl_vector_float_swap_elements(this.ptr, i, j)
 }
 
@@ -210,15 +210,15 @@ pub fn (this VectorFloat)is_non_negative() bool {
 	return rc == 1
 }
 
-fn C.gsl_vector_float_get(&C.gsl_vector_float, index size) float
-pub fn (this VectorFloat)get(index size) float {
+fn C.gsl_vector_float_get(&C.gsl_vector_float, index size_t) float
+pub fn (this VectorFloat)get(index size_t) float {
 	return float(C.gsl_vector_float_get(this.ptr, index))
 }
 
-fn C.gsl_vector_float_set(&C.gsl_vector_float, size, float)
-pub fn (this VectorFloat)set(index size, value float) {
+fn C.gsl_vector_float_set(&C.gsl_vector_float, size_t, float)
+pub fn (this VectorFloat)set(index size_t, value float) {
 	C.gsl_vector_float_set(this.ptr, index, value)
 }
 
-fn C.gsl_vector_float_ptr(&C.gsl_vector_float, size) C.float
-fn C.gsl_vector_float_const_ptr(&C.gsl_vector_float, size) &C.float
+fn C.gsl_vector_float_ptr(&C.gsl_vector_float, size_t) C.float
+fn C.gsl_vector_float_const_ptr(&C.gsl_vector_float, size_t) &C.float
